@@ -14,4 +14,4 @@ df["Daily Return"] = ((df["Close"] - df["Previous Close"])/ df["Previous Close"]
 #     returns.append(result)
 # df["Daily Return"] = returns
 print (df[["Date","Close","Previous Close","Daily Gain","Daily Return"]])
-df[["Date","Close","Previous Close","Daily Gain","Daily Return"]].to_csv("./data/processed/BBCA_processed.csv")
+df[["Date","Close","Previous Close","Daily Gain","Daily Return"]].to_csv("./data/processed/BBCA_processed.csv" ,index=False)
