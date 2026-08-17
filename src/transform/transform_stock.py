@@ -13,5 +13,10 @@ df["Daily Return"] = ((df["Close"] - df["Previous Close"])/ df["Previous Close"]
 #         result = 0
 #     returns.append(result)
 # df["Daily Return"] = returns
-print (df[["Date","Close","Previous Close","Daily Gain","Daily Return"]])
-df[["Date","Close","Previous Close","Daily Gain","Daily Return"]].to_csv("./data/processed/BBCA_processed.csv" ,index=False)
+
+df["MA_5"] = df["Close"].rolling(window=5).mean()
+df["MA_20"] = df["Close"].rolling(window=20).mean()
+
+print (df[["Date","Close","Previous Close","Daily Gain","Daily Return","MA_5","MA_20"]].head())
+print (df[["Date","Close","Previous Close","Daily Gain","Daily Return","MA_5","MA_20"]].tail())
+df[["Date","Close","Previous Close","Daily Gain","Daily Return","MA_5","MA_20"]].to_csv("./data/processed/BBCA_processed.csv" ,index=False)
