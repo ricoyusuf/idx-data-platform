@@ -29,6 +29,15 @@ df["Trend"] = np.where(
 
 df["Distance_MA20"] = ((df["Close"] - df["MA_20"]) / df["MA_20"]) * 100
 
-print (df[["Date","Close","Previous Close","Daily Gain","Daily Return","MA_5","MA_20","Trend","Distance_MA20"]].head())
-print (df[["Date","Close","Previous Close","Daily Gain","Daily Return","MA_5","MA_20","Trend","Distance_MA20"]].tail())
-df[["Date","Close","Previous Close","Daily Gain","Daily Return","MA_5","MA_20","Trend","Distance_MA20"]].to_csv("./data/processed/BBCA_processed.csv" ,index=False)
+conditions = [
+    df["Distance_MA20"] < -2,
+    (df["Distance_MA20"] >= -2) & (df["Distance_MA20"] <= 2),
+    df["Distance_MA20"] > 2
+]
+
+categories = ["Far Below MA20", "Near MA20", "Far Above MA20"]
+df["MA20_Category"] = np.select(conditions,categories,default="No Signal")
+print(df[["Date", "Close", "MA_20", "Distance_MA20", "MA20_Category"]].tail(10))
+# print (df[["Date","Close","Previous Close","Daily Gain","Daily Return","MA_5","MA_20","Trend","Distance_MA20"]].head())
+# print (df[["Date","Close","Previous Close","Daily Gain","Daily Return","MA_5","MA_20","Trend","Distance_MA20"]].tail())
+df[["Date","Close","Previous Close","Daily Gain","Daily Return","MA_5","MA_20","Trend","Distance_MA20","MA20_Category"]].to_csv("./data/processed/BBCA_processed.csv" ,index=False)
