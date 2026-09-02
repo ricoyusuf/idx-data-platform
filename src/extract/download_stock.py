@@ -1,11 +1,16 @@
 import yfinance as yf 
-import pandas as pd
-ticker = "BBCA.JK"
-stock_data = yf.download(ticker)
-stock_data.columns = stock_data.columns.get_level_values(0)
-print(type(stock_data))
-print(stock_data.head())
-print(stock_data.columns)
-print(stock_data.info())
+from pathlib import Path
 
-stock_data.reset_index().to_csv("data/BBCA.csv", index=False)
+BASE_DIR = Path(__file__).resolve().parents[2]
+DATA_DIR = BASE_DIR / "data"
+
+def download_stock(ticker) :
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+    stock_data = yf.download(f"{ticker}.jk")
+    stock_data.columns = stock_data.columns.get_level_values(0)
+    
+    stock_data.reset_index().to_csv(DATA_DIR / f"{ticker}.csv", index=False)
+
+if __name__ == "__main__":
+    download_stock("BBCA")
