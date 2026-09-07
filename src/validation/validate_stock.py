@@ -1,18 +1,28 @@
 import pandas as pd
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parents[2]
+DATA_DIR = BASE_DIR / "data"
 
-df = pd.read_csv("./data/BBCA.csv", parse_dates=["Date"])
+def validate_stock(ticker):
 
-print("Shape:", df.shape)
+    df = pd.read_csv(DATA_DIR / f"{ticker}.csv", parse_dates=["Date"])
+    print("Shape:", df.shape)
 
-print("\nMissing Values:")
-print(df.isna().sum())
+    print("\nMissing Values:")
+    print(df.isna().sum())
 
-print("\nDuplicate Rows:")
-print(df.duplicated().sum())
+    print("\nDuplicate Rows:")
+    print(df.duplicated().sum())
 
-print("\nData Types:")
-print(df.dtypes)
+    print("\nData Types:")
+    print(df.dtypes)
 
-print("\nDate Range:")
-print("Start Date:", df["Date"].iloc[0])
-print("End Date:", df["Date"].iloc[-1])
+    print("\nDate Range:")
+    print("Start Date:", df["Date"].iloc[0])
+    print("End Date:", df["Date"].iloc[-1])
+
+    return df.isna().sum().sum() == 0 and df.duplicated().sum() == 0
+    
+if __name__ == "__main__":
+    result = validate_stock("BBCA")
+    print("Validation result: ", result)
