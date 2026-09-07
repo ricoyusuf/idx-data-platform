@@ -5,9 +5,8 @@ import numpy as np
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = BASE_DIR / "data"
 
-def transform_stock(ticker):
+def transform_stock(df):
 
-    df = pd.read_csv(DATA_DIR / f"{ticker}.csv", parse_dates=["Date"])
     df["Previous Close"] = df["Close"].shift(1)
     df["Daily Gain"] = df["Close"] - df["Previous Close"]
     df["Daily Return"] = ((df["Close"] - df["Previous Close"])/ df["Previous Close"]) * 100

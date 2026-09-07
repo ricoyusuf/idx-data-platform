@@ -3,9 +3,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = BASE_DIR / "data"
 
-def validate_stock(ticker):
+def validate_stock(df):
 
-    df = pd.read_csv(DATA_DIR / f"{ticker}.csv", parse_dates=["Date"])
     print("Shape:", df.shape)
 
     print("\nMissing Values:")
