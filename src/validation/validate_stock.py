@@ -15,7 +15,10 @@ def validate_stock(df):
 
     return (df.isna().sum().sum() == 0 
             and df.duplicated().sum() == 0 
-            and set(required_columns).issubset(df.columns))
+            and set(required_columns).issubset(df.columns)
+            and df["Date"].is_monotonic_increasing
+    )
+            
     
 if __name__ == "__main__":
     result = validate_stock("BBCA")
