@@ -18,3 +18,7 @@ venv/
 # OS
 .DS_Store
 Thumbs.db
+
+# Generated stock data
+data/raw/*.csv
+data/processed/*.csv
