@@ -41,7 +41,7 @@ def run_all_stocks(tickers):
         log[ticker] = run_pipeline(ticker)
     return log
 
-TICKERS = ["BBCA", "BBRI", "BMRI", "TLKM"]    
+TICKERS = ["BBCA", "BBRI", "BMRI", "TLKM","ANTM","AUTO","LSIP","ESSA"]    
 if __name__ == "__main__":
     result = run_all_stocks(TICKERS)
     for ticker, status in result.items():
