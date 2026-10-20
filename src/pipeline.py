@@ -2,6 +2,7 @@ from src.extract.download_stock import download_stock
 from src.validation.validate_stock import validate_stock
 from src.transform.transform_stock import transform_stock
 from src.load.load_stock import load_stock
+from src.load.db_setup import setup_database
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parents[1]
@@ -43,6 +44,8 @@ def run_all_stocks(tickers):
 
 TICKERS = ["BBCA", "BBRI", "BMRI", "TLKM","ANTM","AUTO","LSIP","ESSA"]    
 if __name__ == "__main__":
+    setup_database()
+    
     result = run_all_stocks(TICKERS)
     for ticker, status in result.items():
         if status:

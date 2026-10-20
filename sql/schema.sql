@@ -1,4 +1,4 @@
-CREATE TABLE stock_prices (
+CREATE TABLE IF NOT EXISTS stock_prices (
     ticker VARCHAR(10) NOT NULL,
     date DATE NOT NULL,
     open NUMERIC(12,2),
