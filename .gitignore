@@ -19,6 +19,14 @@ venv/
 .DS_Store
 Thumbs.db
 
+# Airflow runtime files
+orchestration/airflow/logs/
+orchestration/airflow/config/
+orchestration/airflow/.env
+
 # Generated stock data
-data/raw/*.csv
-data/processed/*.csv
+data/raw/
+data/processed/
+
+# Pytest cache
+.pytest_cache/
